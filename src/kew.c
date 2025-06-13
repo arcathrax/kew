@@ -440,16 +440,14 @@ void notifySongSwitch(SongData *currentSongData, UISettings *ui)
         if (currentSongData != NULL && currentSongData->hasErrors == 0 && currentSongData->metadata && strnlen(currentSongData->metadata->title, 10) > 0)
         {
 #ifdef __APPLE__
-    // macOS notification for switching songs
-    if (artist == NULL || title == NULL)
-        return 0;
+        // Buffer for the command string
+        char command[512];
 
-    char command[512];
-    snprintf(command, sizeof(command),
-             "osascript -e 'display notification \"%s\" with title \"%s\"'",
-             currentSongData->metadata->title,
-             currentSongData->metadata->artist
-             );
+        // Build the command string with the variables embedded
+        sprintf(command, "osascript -e 'display notification \"%s\" with title \"%s\"'", currentSongData->metadata->artist, currentSongData->metadata->title);
+
+        // Run the command
+        system(command);
 #elif defined(USE_DBUS)
                 displaySongNotification(currentSongData->metadata->artist, currentSongData->metadata->title, currentSongData->coverArtPath, ui);
 #else
@@ -492,6 +490,7 @@ void refreshPlayer(UIState *uis)
         if (mutexResult != 0)
         {
                 fprintf(stderr, "Failed to lock switch mutex.\n");
+
                 return;
         }
 
