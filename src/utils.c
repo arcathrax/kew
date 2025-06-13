@@ -273,7 +273,7 @@ char *getConfigPath(void)
                 if (home)
                 {
 #ifdef __APPLE__
-                        snprintf(configPath, MAXPATHLEN, "%s/Library/Preferences/kew", home);
+                        snprintf(configPath, MAXPATHLEN, "%s/.config/kew", home);
 #else
                         snprintf(configPath, MAXPATHLEN, "%s/.config/kew", home);
 #endif
@@ -284,7 +284,7 @@ char *getConfigPath(void)
                         if (pw)
                         {
 #ifdef __APPLE__
-                                snprintf(configPath, MAXPATHLEN, "%s/Library/Preferences/kew", pw->pw_dir);
+                                snprintf(configPath, MAXPATHLEN, "%s/.config/kew", pw->pw_dir);
 #else
                                 snprintf(configPath, MAXPATHLEN, "%s/.config/kew", pw->pw_dir);
 #endif

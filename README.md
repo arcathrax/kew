@@ -289,7 +289,7 @@ You can select all music by pressing the - MUSIC LIBRARY - header at the top of 
 
 ## Configuration
 
-kew will create a config file, kewrc, in a kew folder in your default config directory for instance ~/.config/kew or ~/Library/Preferences/kew on macOS. There you can change some settings like key bindings and the default colors of the app. To edit this file please make sure you quit kew first.
+kew will create a config file, kewrc, in a kew folder in your default config directory for instance ~/.config/kew. There you can change some settings like key bindings and the default colors of the app. To edit this file please make sure you quit kew first.
 
 ## Nerd Fonts
 
