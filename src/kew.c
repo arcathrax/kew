@@ -439,7 +439,18 @@ void notifySongSwitch(SongData *currentSongData, UISettings *ui)
 {
         if (currentSongData != NULL && currentSongData->hasErrors == 0 && currentSongData->metadata && strnlen(currentSongData->metadata->title, 10) > 0)
         {
-#ifdef USE_DBUS
+#ifdef __APPLE__
+    // macOS notification for switching songs
+    if (artist == NULL || title == NULL)
+        return 0;
+
+    char command[512];
+    snprintf(command, sizeof(command),
+             "osascript -e 'display notification \"%s\" with title \"%s\"'",
+             currentSongData->metadata->title,
+             currentSongData->metadata->artist
+             );
+#elif defined(USE_DBUS)
                 displaySongNotification(currentSongData->metadata->artist, currentSongData->metadata->title, currentSongData->coverArtPath, ui);
 #else
                 (void)ui;
